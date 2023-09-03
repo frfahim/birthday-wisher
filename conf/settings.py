@@ -12,8 +12,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
-
 import environ
+from celery.schedules import crontab
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -136,7 +137,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "Asia/Dhaka"
 
 USE_I18N = True
 
@@ -157,4 +158,32 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20
+}
+
+ADMINS = [("Fahim", "farhadurfahim@gmail.com"), ]
+
+# EMAIL Configuration
+EMAIL_BACKEND = env("EMAIL_BACKEND")
+EMAIL_HOST = env("EMAIL_HOST")
+EMAIL_PORT = env("EMAIL_PORT")
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = env("EMAIL_USE_TLS")
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
+
+# for local testing using console email backend
+# we can also test with Mailhog with local mail server, https://github.com/mailhog/MailHog
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+# Celery Config
+CELERY_TIMEZONE = TIME_ZONE
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+
+CELERY_BEAT_SCHEDULE = {
+    "birthday_wisher": {
+        "task": "customer.tasks.send_birthday_wish",
+        # "schedule": crontab(minute="1", hour="0"),
+        "schedule": crontab(minute="*/1"),
+    },
 }
