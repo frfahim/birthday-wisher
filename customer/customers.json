@@ -1,0 +1,29 @@
+[
+    {
+        "model": "customer.customer",
+        "pk": 1,
+        "fields": {
+            "name": "Fahim 01",
+            "email": "farhadurfahim+01@gmail.com",
+            "birthdate": "2000-08-20"
+        }
+    },
+    {
+        "model": "customer.customer",
+        "pk": 2,
+        "fields": {
+            "name": "Fahim 02",
+            "email": "farhadurfahim+02@gmail.com",
+            "birthdate": "2001-02-03"
+        }
+    },
+    {
+        "model": "customer.customer",
+        "pk": 3,
+        "fields": {
+            "name": "Fahim 03",
+            "email": "farhadurfahim+03@gmail.com",
+            "birthdate": "2004-08-09"
+        }
+    }
+]
