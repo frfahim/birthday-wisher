@@ -16,7 +16,12 @@ Birthday wisher is a django based application, that wishes on customers birthday
 
 - Goto project directory `cd birthday-wisher`
 
-- Install requirement file `poetry install`
+- Used poetry here, To Install necessary packages `poetry install`
+
+- If you are not using poetry then create an virtual enviornment and install pakages `pip install -r requirements.txt`
+
+- Copy `.env.sample` file then create a file `.env` (make sure you have changed env value with your data) without env file project wont run
+`cp .env.sample .env`
 
 - Enter to virtual env created by Poetry `poetry shell`
 
@@ -157,3 +162,9 @@ Response
 }
 ```
 </details>
+
+
+#### TODO:
+ - Docker support and docker-compose
+ - Add ruff, mypy for better coding style
+ - Integrate pre-commit to automate code checking
